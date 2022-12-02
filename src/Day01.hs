@@ -13,7 +13,7 @@ sumGroup :: [String] -> Int
 sumGroup = sum . map read
 
 solveP1 :: Solver
-solveP1 = splitOn [""] >>> map sumGroup >>> maximum
+solveP1 = maximum . (splitOn [""] >>> map sumGroup)
 
 solveP2 :: Solver
-solveP2 = splitOn [""] >>> map sumGroup >>> sum . take 3 . sortBy (flip compare)
+solveP2 = sum . take 3 . sortBy (flip compare) . (splitOn [""] >>> map sumGroup)

@@ -5,7 +5,6 @@ module Day02
 where
 
 import Common (Solver)
-import Control.Arrow
 import Data.List (find)
 import Data.Maybe (fromJust)
 
@@ -55,7 +54,7 @@ evalStrategyLine :: StrategyLine -> Int
 evalStrategyLine (opponent, me) = shapeScore me + outcomeScore (outcome opponent me)
 
 solveP1 :: Solver
-solveP1 = map parseLineP1 >>> map evalStrategyLine >>> sum
+solveP1 = sum . fmap (evalStrategyLine . parseLineP1)
 
 --
 
@@ -77,4 +76,4 @@ convertToStrategyLine :: IntentLine -> StrategyLine
 convertToStrategyLine (a, b) = (a, fromJust $ findAction (a, b))
 
 solveP2 :: Solver
-solveP2 = map parseLineP2 >>> map convertToStrategyLine >>> map evalStrategyLine >>> sum
+solveP2 = sum . fmap (evalStrategyLine . convertToStrategyLine . parseLineP2)
