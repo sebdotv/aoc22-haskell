@@ -74,7 +74,7 @@ findAction :: IntentLine -> Maybe Shape
 findAction (a, b) = find (\x -> outcome a x == b) shapes
 
 convertToStrategyLine :: IntentLine -> StrategyLine
-convertToStrategyLine (a, b) = (a, fromJust (findAction (a, b)))
+convertToStrategyLine (a, b) = (a, fromJust $ findAction (a, b))
 
 solveP2 :: Solver
 solveP2 = map parseLineP2 >>> map convertToStrategyLine >>> map evalStrategyLine >>> sum
