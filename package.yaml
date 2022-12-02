@@ -21,7 +21,16 @@ ghc-options:
 library:
   source-dirs: src
 
-executables: {}
+executables:
+  aoc22-haskell-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aoc22-haskell
 
 tests:
   aoc22-haskell-test:
