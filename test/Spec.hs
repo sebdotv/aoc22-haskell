@@ -7,16 +7,16 @@ import Text.Printf
 
 main :: IO ()
 main = hspec $ do
-  describe "day01 P1" $ do
-    testPart Day01.solveP1 "01" 24000 70613
-  describe "day01 P2" $ do
-    testPart Day01.solveP2 "01" 45000 205805
-  describe "day02 P1" $ do
-    testPart Day02.solveP1 "02" 15 11386
-  describe "day02 P2" $ do
-    testPart Day02.solveP2 "02" 12 13600
+  testDay "01" Day01.solveP1 24000 70613 Day01.solveP2 45000 205805
+  testDay "02" Day02.solveP1 15 11386 Day02.solveP2 12 13600
   where
     readLines name = lines <$> readFile name
+
+    testDay day solver1 solutionExample1 solutionInput1 solver2 solutionExample2 solutionInput2 = do
+      describe (printf "day %s P1" day) $ do
+        testPart solver1 day solutionExample1 solutionInput1
+      describe (printf "day %s P2" day) $ do
+        testPart solver2 day solutionExample2 solutionInput2
 
     testPart solver day solutionExample solutionInput = do
       it "works for example" $ test solver (printf "./data/%s-example.txt" day) solutionExample
