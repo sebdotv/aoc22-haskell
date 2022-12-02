@@ -1,4 +1,4 @@
 module Main (main) where
 
 main :: IO ()
-main = print "run tests instead"
+main = print "run `stack test` instead"

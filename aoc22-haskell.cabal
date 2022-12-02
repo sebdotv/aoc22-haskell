@@ -10,7 +10,8 @@ build-type:     Simple
 
 library
   exposed-modules:
-      Lib
+      Common
+      Day01
   other-modules:
       Paths_aoc22_haskell
   hs-source-dirs:
