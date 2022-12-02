@@ -5,7 +5,6 @@ module Day01
 where
 
 import Common (Solver)
-import Control.Arrow
 import Data.List (sortBy)
 import Data.List.Split (splitOn)
 
@@ -13,7 +12,7 @@ sumGroup :: [String] -> Int
 sumGroup = sum . map read
 
 solveP1 :: Solver
-solveP1 = maximum . (splitOn [""] >>> map sumGroup)
+solveP1 = maximum . map sumGroup . splitOn [""]
 
 solveP2 :: Solver
-solveP2 = sum . take 3 . sortBy (flip compare) . (splitOn [""] >>> map sumGroup)
+solveP2 = sum . take 3 . sortBy (flip compare) . map sumGroup . splitOn [""]
