@@ -11,6 +11,9 @@ import Data.Maybe (fromJust)
 
 data Shape = Rock | Paper | Scissors deriving (Enum, Eq, Show, Bounded)
 
+shapes :: [Shape]
+shapes = [minBound .. maxBound]
+
 type StrategyLine = (Shape, Shape)
 
 data Outcome = Win | Loss | Draw deriving (Enum, Eq)
@@ -21,14 +24,14 @@ parseOpponentShape 'B' = Paper
 parseOpponentShape 'C' = Scissors
 parseOpponentShape _ = error "unsupported shape"
 
-parseLine :: String -> StrategyLine
-parseLine [a, ' ', b] = (parseOpponentShape a, parseMeShape b)
+parseLineP1 :: String -> StrategyLine
+parseLineP1 [a, ' ', b] = (parseOpponentShape a, parseMeShape b)
   where
     parseMeShape 'X' = Rock
     parseMeShape 'Y' = Paper
     parseMeShape 'Z' = Scissors
     parseMeShape _ = error "unsupported shape"
-parseLine _ = error "unsupported line"
+parseLineP1 _ = error "unsupported line"
 
 outcome :: Shape -> Shape -> Outcome
 outcome Rock Scissors = Loss
@@ -52,31 +55,25 @@ evalStrategyLine :: StrategyLine -> Int
 evalStrategyLine (opponent, me) = shapeScore me + outcomeScore (outcome opponent me)
 
 solveP1 :: Solver
-solveP1 = map parseLine >>> map evalStrategyLine >>> sum
+solveP1 = map parseLineP1 >>> map evalStrategyLine >>> sum
 
 --
 
-parseOutcome :: Char -> Outcome
-parseOutcome 'X' = Loss
-parseOutcome 'Y' = Draw
-parseOutcome 'Z' = Win
-parseOutcome _ = error "unsupported outcome"
+type IntentLine = (Shape, Outcome)
 
-type StrategyLineP2 = (Shape, Outcome)
-
---data StrategyLineP2 = StrategyLineP2 {opponentP2 :: Shape, outcomeP2 :: Outcome}
-
-parseLineP2 :: String -> StrategyLineP2
+parseLineP2 :: String -> IntentLine
 parseLineP2 [a, ' ', b] = (parseOpponentShape a, parseOutcome b)
+  where
+    parseOutcome 'X' = Loss
+    parseOutcome 'Y' = Draw
+    parseOutcome 'Z' = Win
+    parseOutcome _ = error "unsupported outcome"
 parseLineP2 _ = error "unsupported line"
 
-shapes :: [Shape]
-shapes = [minBound .. maxBound]
-
-findAction :: StrategyLineP2 -> Maybe Shape
+findAction :: IntentLine -> Maybe Shape
 findAction (a, b) = find (\x -> outcome a x == b) shapes
 
-convertToStrategyLine :: StrategyLineP2 -> StrategyLine
+convertToStrategyLine :: IntentLine -> StrategyLine
 convertToStrategyLine (a, b) = (a, fromJust (findAction (a, b)))
 
 solveP2 :: Solver
