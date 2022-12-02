@@ -1,4 +1,4 @@
-module Day01
+module Lib
   ( solveP1,
     solveP2,
   )
