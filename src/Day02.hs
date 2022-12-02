@@ -11,7 +11,7 @@ import Data.Maybe (fromJust)
 
 data Shape = Rock | Paper | Scissors deriving (Enum, Eq, Show, Bounded)
 
-data StrategyLine = StrategyLine {opponent :: Shape, me :: Shape}
+type StrategyLine = (Shape, Shape)
 
 data Outcome = Win | Loss | Draw deriving (Enum, Eq)
 
@@ -21,14 +21,13 @@ parseOpponentShape 'B' = Paper
 parseOpponentShape 'C' = Scissors
 parseOpponentShape _ = error "unsupported shape"
 
-parseMeShape :: Char -> Shape
-parseMeShape 'X' = Rock
-parseMeShape 'Y' = Paper
-parseMeShape 'Z' = Scissors
-parseMeShape _ = error "unsupported shape"
-
 parseLine :: String -> StrategyLine
-parseLine [a, ' ', b] = StrategyLine (parseOpponentShape a) (parseMeShape b)
+parseLine [a, ' ', b] = (parseOpponentShape a, parseMeShape b)
+  where
+    parseMeShape 'X' = Rock
+    parseMeShape 'Y' = Paper
+    parseMeShape 'Z' = Scissors
+    parseMeShape _ = error "unsupported shape"
 parseLine _ = error "unsupported line"
 
 outcome :: Shape -> Shape -> Outcome
@@ -50,7 +49,7 @@ outcomeScore Draw = 3
 outcomeScore Win = 6
 
 evalStrategyLine :: StrategyLine -> Int
-evalStrategyLine l = shapeScore (me l) + outcomeScore (outcome (opponent l) (me l))
+evalStrategyLine (opponent, me) = shapeScore me + outcomeScore (outcome opponent me)
 
 solveP1 :: Solver
 solveP1 = map parseLine >>> map evalStrategyLine >>> sum
@@ -63,20 +62,22 @@ parseOutcome 'Y' = Draw
 parseOutcome 'Z' = Win
 parseOutcome _ = error "unsupported outcome"
 
-data StrategyLineP2 = StrategyLineP2 {opponentP2 :: Shape, outcomeP2 :: Outcome}
+type StrategyLineP2 = (Shape, Outcome)
+
+--data StrategyLineP2 = StrategyLineP2 {opponentP2 :: Shape, outcomeP2 :: Outcome}
 
 parseLineP2 :: String -> StrategyLineP2
-parseLineP2 [a, ' ', b] = StrategyLineP2 (parseOpponentShape a) (parseOutcome b)
+parseLineP2 [a, ' ', b] = (parseOpponentShape a, parseOutcome b)
 parseLineP2 _ = error "unsupported line"
 
 shapes :: [Shape]
 shapes = [minBound .. maxBound]
 
 findAction :: StrategyLineP2 -> Maybe Shape
-findAction l = find (\x -> outcome (opponentP2 l) x == outcomeP2 l) shapes
+findAction (a, b) = find (\x -> outcome a x == b) shapes
 
 convertToStrategyLine :: StrategyLineP2 -> StrategyLine
-convertToStrategyLine l = StrategyLine (opponentP2 l) (fromJust (findAction l))
+convertToStrategyLine (a, b) = (a, fromJust (findAction (a, b)))
 
 solveP2 :: Solver
 solveP2 = map parseLineP2 >>> map convertToStrategyLine >>> map evalStrategyLine >>> sum
