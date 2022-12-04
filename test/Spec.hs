@@ -11,7 +11,7 @@ main = hspec $ do
   --  testDay "00" Day00.solveP1 undefined undefined Day00.solveP2 undefined undefined
   testDay "01" Day01.solveP1 24000 70613 Day01.solveP2 45000 205805
   testDay "02" Day02.solveP1 15 11386 Day02.solveP2 12 13600
-  testDay "03" Day03.solveP1 157 7875 Day03.solveP2 0 0
+  testDay "03" Day03.solveP1 157 7875 Day03.solveP2 70 2479
   where
     readLines name = lines <$> readFile name
 
