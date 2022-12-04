@@ -6,12 +6,16 @@ where
 
 import Common (Solver)
 import Data.Char (ord)
-import Data.List (intersect)
+import Data.List (intersect, nub)
+import Text.Printf (printf)
 
 sharedItem :: String -> Char
-sharedItem = head . uncurry intersect . splitHalf
+sharedItem = singleElement . nub . uncurry intersect . splitHalf
   where
     splitHalf ls = splitAt (length ls `div` 2) ls
+
+    singleElement [x] = x
+    singleElement unexpected = error (printf "unexpected list: %s" unexpected)
 
 solveP1 :: Solver
 solveP1 = sum . map (score . sharedItem)
