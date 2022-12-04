@@ -11,6 +11,7 @@ build-type:     Simple
 library
   exposed-modules:
       Common
+      Day00
       Day01
       Day02
   other-modules:
