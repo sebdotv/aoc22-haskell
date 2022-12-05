@@ -65,7 +65,7 @@ solveP1 = solve crateMover9000
           where
             (value, stackFrom) = case ss !! from of
               a : b -> (a, b)
-              _ -> error "cannot pop from empty lost"
+              _ -> error "cannot pop from empty list"
             stackTo = value : ss !! to
 
 solveP2 :: SolverS
