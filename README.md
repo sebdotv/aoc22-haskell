@@ -1,17 +1,35 @@
-#    
+#      
+
+## Running tests
+
+### Run specific tests
+
+Run a single day
+
+```shell
+stack test --test-arguments '--match "day 05"'
+```
+
+Run a single test
+
+```shell
+stack test --test-arguments '--match "/day 05 P1/works for example/"'
+```
+
+## Interacting with website
 
 ### Download input
 
 For today
 
 ```shell
-aoc download --input-file data/03-input.txt
+aocdl -output 'data/{{printf "%02d" .Day}}-input.txt'
 ```
 
 For a specific day
 
 ```shell
-aoc download --input-file data/03-input.txt --day 3
+aocdl -output 'data/{{printf "%02d" .Day}}-input.txt' -day 3
 ```
 
 ### Submit solution

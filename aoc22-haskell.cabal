@@ -15,6 +15,8 @@ library
       Day01
       Day02
       Day03
+      Day04
+      Day05
   other-modules:
       Paths_aoc22_haskell
   hs-source-dirs:
