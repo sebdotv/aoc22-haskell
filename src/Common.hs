@@ -1,6 +1,7 @@
 module Common
   ( Solver,
     SolverS,
+    SolverIA,
     GenericSolver,
     mapTuple,
   )
@@ -11,6 +12,8 @@ type GenericSolver a = [String] -> a
 type Solver = GenericSolver Int
 
 type SolverS = GenericSolver String
+
+type SolverIA = GenericSolver [Int]
 
 -- https://stackoverflow.com/a/9722949
 mapTuple :: (a -> b) -> (a, a) -> (b, b)

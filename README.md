@@ -37,7 +37,7 @@ aocdl -output 'data/{{printf "%02d" .Day}}-input.txt' -day 3
 For today, part 1
 
 ```shell
-aoc submit 2 7875
+aoc submit 1 7875
 ```
 
 For a specific day, part 2
