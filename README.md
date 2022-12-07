@@ -1,22 +1,46 @@
-#      
+# Advent of code 2022 solutions in Haskell
 
-## Running tests
+<img alt="Benchmark" height="75%" src="bench.svg" width="75%"/>
+
+## Test
+
+### Run all tests
+
+```shell
+stack test :aoc22-haskell-test
+```
 
 ### Run specific tests
 
 Run a single day
 
 ```shell
-stack test --test-arguments '--match "day 05"'
+stack test :aoc22-haskell-test --test-arguments '--match "day 05"'
 ```
 
 Run a single test
 
 ```shell
-stack test --test-arguments '--match "/day 05 P1/works for example/"'
+stack test :aoc22-haskell-test --test-arguments '--match "/day 05 P1/works for example/"'
 ```
 
-## Interacting with website
+
+## Benchmark
+
+### Run all benchmarks
+
+```shell
+stack test :aoc22-haskell-bench
+```
+
+### Visualize benchmark results
+
+```shell
+stack test :aoc22-haskell-bench --test-arguments "--svg bench.svg --color always" && chromium bench.svg
+```
+
+
+## Website interaction
 
 ### Download input
 

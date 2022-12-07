@@ -4,7 +4,7 @@ module Day05
   )
 where
 
-import Common (SolverS)
+import Common (Solver)
 import Data.List.Split (splitOn)
 import Data.Maybe (fromMaybe)
 
@@ -53,7 +53,7 @@ solve mover ls = map head finalStacks
     finalStacks = run mover input
     input = parseInput ls
 
-solveP1 :: SolverS
+solveP1 :: Solver
 solveP1 = solve crateMover9000
   where
     crateMover9000 :: Mover
@@ -68,7 +68,7 @@ solveP1 = solve crateMover9000
               _ -> error "cannot pop from empty list"
             stackTo = value : ss !! to
 
-solveP2 :: SolverS
+solveP2 :: Solver
 solveP2 = solve crateMover9001
   where
     crateMover9001 :: Mover

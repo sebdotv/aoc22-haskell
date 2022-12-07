@@ -4,7 +4,7 @@ module Day06
   )
 where
 
-import Common (SolverIA)
+import Common (Solver)
 import Data.List (group, sort)
 
 detectStartOfPacket :: Int -> String -> Int
@@ -17,8 +17,8 @@ detectStartOfPacket len s = it s [] 0
         then pos
         else it xs (take len (x : buf)) (pos + 1)
 
-solveP1 :: SolverIA
-solveP1 = map (detectStartOfPacket 4)
+solveP1 :: Solver
+solveP1 = show . map (detectStartOfPacket 4)
 
-solveP2 :: SolverIA
-solveP2 = map (detectStartOfPacket 14)
+solveP2 :: Solver
+solveP2 = show . map (detectStartOfPacket 14)

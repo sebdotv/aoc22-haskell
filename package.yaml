@@ -6,6 +6,7 @@ extra-source-files: []
 dependencies:
 - base >= 4.7 && < 5
 - split
+- containers
 
 ghc-options:
 - -Wall
@@ -43,3 +44,13 @@ tests:
     dependencies:
     - aoc22-haskell
     - hspec
+
+  aoc22-haskell-bench:
+    main:                Bench.hs
+    source-dirs:         bench
+    ghc-options:
+      - -with-rtsopts=-A32m
+    dependencies:
+      - aoc22-haskell
+      - tasty-bench
+      - deepseq

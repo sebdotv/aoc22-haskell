@@ -54,7 +54,7 @@ evalStrategyLine :: StrategyLine -> Int
 evalStrategyLine (opponent, me) = shapeScore me + outcomeScore (outcome opponent me)
 
 solveP1 :: Solver
-solveP1 = sum . fmap (evalStrategyLine . parseLineP1)
+solveP1 = show . sum . fmap (evalStrategyLine . parseLineP1)
 
 --
 
@@ -76,4 +76,4 @@ convertToStrategyLine :: IntentLine -> StrategyLine
 convertToStrategyLine (a, b) = (a, fromJust $ findAction (a, b))
 
 solveP2 :: Solver
-solveP2 = sum . fmap (evalStrategyLine . convertToStrategyLine . parseLineP2)
+solveP2 = show . sum . fmap (evalStrategyLine . convertToStrategyLine . parseLineP2)

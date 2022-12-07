@@ -26,10 +26,10 @@ priority c = case c of
   _ -> error "unexpected item"
 
 solveP1 :: Solver
-solveP1 = sum . map (priority . sharedItem)
+solveP1 = show . sum . map (priority . sharedItem)
 
 intersection :: (Eq a) => [[a]] -> [a]
 intersection = foldr1 intersect
 
 solveP2 :: Solver
-solveP2 = sum . map (priority . singleElement . nub . intersection) . chunksOf 3
+solveP2 = show . sum . map (priority . singleElement . nub . intersection) . chunksOf 3

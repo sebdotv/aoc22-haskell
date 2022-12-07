@@ -35,7 +35,7 @@ count :: (a -> Bool) -> [a] -> Int
 count p = length . filter p
 
 solveP1 :: Solver
-solveP1 = count redundant . map parseLine
+solveP1 = show . count redundant . map parseLine
 
 solveP2 :: Solver
-solveP2 = count overlapping . map parseLine
+solveP2 = show . count overlapping . map parseLine
