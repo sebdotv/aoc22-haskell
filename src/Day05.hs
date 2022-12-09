@@ -17,7 +17,7 @@ type Operation = (Int, Int, Int)
 type State = ([Stack], [Operation])
 
 parseStacks :: [String] -> [Stack]
-parseStacks ls = [dropEmpty [fromMaybe ' ' (nth l (h * 4 + 1)) | l <- init ls] | h <- [0 .. nStacks -1]]
+parseStacks ls = [dropEmpty [fromMaybe ' ' (nth l (h * 4 + 1)) | l <- init ls] | h <- [0 .. nStacks - 1]]
   where
     dropEmpty = dropWhile (== ' ')
     nth l i = if i < length l then Just (l !! i) else Nothing
