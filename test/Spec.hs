@@ -1,4 +1,4 @@
-import Common (Solver, dayStr, readLines, inputFile, exampleFile)
+import Common (Solver, dayStr, exampleFile, inputFile, readLines)
 import Control.Monad.IO.Class (liftIO)
 import Ref
 import Test.Hspec
@@ -15,7 +15,8 @@ main = hspec $ do
         ("2", "569", "4", "936"), -- 04
         ("CMZ", "MQTPGLLDN", "MCD", "LVZPSTTCZ"), -- 05
         ("[7,5,6,10,11]", "[1723]", "[19,23,23,29,26]", "[3708]"), -- 06
-        ("95437", "1453349", "24933642", "2948823") -- 07
+        ("95437", "1453349", "24933642", "2948823"), -- 07
+        ("21", "", "", "") -- 08
       ]
 
     testDay day solver1 solutionExample1 solutionInput1 solver2 solutionExample2 solutionInput2 = parallel $ do
