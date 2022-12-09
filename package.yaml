@@ -45,6 +45,7 @@ tests:
     - aoc22-haskell
     - hspec
 
+benchmarks:
   aoc22-haskell-bench:
     main:                Bench.hs
     source-dirs:         bench
@@ -54,3 +55,11 @@ tests:
       - aoc22-haskell
       - tasty-bench
       - deepseq
+
+  aoc22-haskell-prof:
+    main:                Prof.hs
+    source-dirs:         prof
+    ghc-options:
+      - -with-rtsopts=-A32m
+    dependencies:
+      - aoc22-haskell
